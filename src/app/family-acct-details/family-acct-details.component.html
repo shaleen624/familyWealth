@@ -5,9 +5,10 @@
           <ngb-panel [id]="person.toLowerCase()">
             <ng-template ngbPanelTitle>
               <div class="d-flex justify-content-between align-items-center w-100">
-                <button class="btn btn-link" (click)="toggleCollapse(person)">
+                <!-- <button class="btn btn-link" (click)="toggleCollapse(person)">
                   {{ person }}'s Accounts <i [class]="isCollapsed[person] ? 'fas fa-chevron-down' : 'fas fa-chevron-up'"></i>
-                </button>
+                </button> -->
+                <span> {{ person }}'s Accounts</span>
                 <span>Total Balance: ${{ getPersonTotalBalance(person) }}</span>
               </div>
             </ng-template>
@@ -28,6 +29,6 @@
       </ng-container>
     </ngb-accordion>
     <hr class="mt-4">
-    <h3>Total Family Balance: ${{ totalFamilyBalance }}</h3>
+    <h6>Total Family Balance: ${{ totalFamilyBalance }}</h6>
   </div>
   
