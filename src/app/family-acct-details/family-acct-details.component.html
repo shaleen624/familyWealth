@@ -1,18 +1,33 @@
 <div *ngIf="familyData" class="container mt-4">
-    <div *ngFor="let person of ['Father', 'Mother', 'Child']" class="mt-4">
-      <h2>{{ person }}'s Accounts</h2>
-      <div *ngFor="let account of familyData[person.toLowerCase()]" class="card mt-2">
-        <div class="card-header">
-          <h3 class="card-title">Account Number: {{ account.accountNumber }}</h3>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Account Type: {{ account.accountType }}</p>
-          <p class="card-text">Balance: {{ account.balance }}</p>
-          <!-- Add other necessary details -->
-        </div>
-      </div>
-    </div>
+    <ngb-accordion>
+      <ng-container *ngFor="let person of ['Father', 'Mother', 'Child']">
+        <ng-container *ngIf="familyData[person.toLowerCase()].length > 0">
+          <ngb-panel [id]="person.toLowerCase()">
+            <ng-template ngbPanelTitle>
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <button class="btn btn-link" (click)="toggleCollapse(person)">
+                  {{ person }}'s Accounts <i [class]="isCollapsed[person] ? 'fas fa-chevron-down' : 'fas fa-chevron-up'"></i>
+                </button>
+                <span>Total Balance: ${{ getPersonTotalBalance(person) }}</span>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <ng-container *ngIf="!isCollapsed[person]">
+                <div *ngFor="let account of familyData[person.toLowerCase()]" class="card mb-2">
+                  <div class="card-body">
+                    <p class="card-text">Account Number: {{ account.accountNumber }}</p>
+                    <p class="card-text">Account Type: {{ account.accountType }}</p>
+                    <p class="card-text">Balance: ${{ account.balance }}</p>
+                    <!-- Add other necessary details -->
+                  </div>
+                </div>
+              </ng-container>
+            </ng-template>
+          </ngb-panel>
+        </ng-container>
+      </ng-container>
+    </ngb-accordion>
     <hr class="mt-4">
-    <h3>Total Family Balance: {{ totalFamilyBalance }}</h3>
+    <h3>Total Family Balance: ${{ totalFamilyBalance }}</h3>
   </div>
   

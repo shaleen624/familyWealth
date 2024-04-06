@@ -10,11 +10,13 @@ import { Family, Account } from '../services/interfaces';
 export class FamilyAcctDetailsComponent implements OnInit {
   familyData!: any;
   totalFamilyBalance!: number;
+  isCollapsed: { [key: string]: boolean } = {};
 
   constructor(private familyService: FamilyService) { }
 
   ngOnInit(): void {
     this.familyService.getFamilyData().subscribe(data => {
+      debugger
       this.familyData = data;
       this.calculateTotalFamilyBalance();
     });
@@ -27,6 +29,11 @@ export class FamilyAcctDetailsComponent implements OnInit {
       allAccounts = [...allAccounts, ...person];
     }
     this.totalFamilyBalance = allAccounts.reduce((total, account) => total + account.balance, 0);
+  }
+
+  getPersonTotalBalance(person: string): number {
+    const accounts = this.familyData[person.toLowerCase()];
+    return accounts.reduce((total: any, account: { balance: any; }) => total + account.balance, 0);
   }
   
   
@@ -44,6 +51,10 @@ export class FamilyAcctDetailsComponent implements OnInit {
     });
   
     this.familyService.updateAccount(updatedAccounts, person);
+  }
+
+  toggleCollapse(person: string) {
+    this.isCollapsed[person] = !this.isCollapsed[person];
   }
   
 }
