@@ -8,6 +8,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { LandingComponent } from './landing/landing.component';
 import { FamilyAcctDetailsComponent } from './family-acct-details/family-acct-details.component';
 import { SpendingComponent } from './spending/spending.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SpendingComponent } from './spending/spending.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     NgbModule,
     NgChartsModule

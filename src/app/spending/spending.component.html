@@ -1,38 +1,53 @@
 <div class="container mt-4">
     <h2 class="text-center mb-4">Spending Overview</h2>
     <table class="table">
-      <thead>
-        <tr>
-          <th>Person</th>
-          <th>Total Spends</th>
-          <th>Monthly Budget</th>
-          <th>Budget Edit</th>
-          <th>% Overspending</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let person of spendingData">
-          <td>{{ person.name }}</td>
-          <td>{{ person.totalSpends }}</td>
-          <td>{{ person.monthlyBudget }}</td>
-          <td><button class="btn btn-primary" (click)="editBudget(person)">Edit</button></td>
-          <td [ngClass]="{ 'text-danger': isOverspending(person), 'text-success': !isOverspending(person) }">{{ calculateOverspendingPercentage(person) }}%</td>
-        </tr>
-      </tbody>
-    </table>
+        <thead>
+          <tr>
+            <th>Person</th>
+            <th>Total Spends</th>
+            <th>Monthly Budget</th>
+            <th>Overspending</th>
+            <th>% Overspending</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let person of spendingData; let i = index">
+            <td>{{ person.name }}</td>
+            <td>$ {{ person.totalSpends }}</td>
+            <td>
+                <div class="input-group">
+                  <span *ngIf="!person.editMode">{{ person.monthlyBudget }}</span>
+                  <input *ngIf="person.editMode" type="number" [(ngModel)]="person.monthlyBudget" class="form-control" />
+                  <div class="input-group-append">
+                    <button *ngIf="person.editMode" class="btn btn-primary" (click)="toggleEditMode(person)">
+                        <i class="fas" [ngClass]="{ 'fa-thin fa-pen-to-square': !person.editMode, 'fa-thin fa-save': person.editMode }" 
+                        [ngStyle]="{ 'font-size': '18px'}"></i>
+                    </button>
+                    <span *ngIf="!person.editMode" (click)="toggleEditMode(person)"><i class="fas" [ngClass]="{ 'fa-thin fa-pen-to-square': !person.editMode, 'fa-thin fa-save': person.editMode }" 
+                        [ngStyle]="{ 'font-size': '18px', 'margin-left' : '10px'}"></i></span>
+                  </div>
+                </div>
+              </td>
+              <td [ngClass]="{ 'text-danger': isOverspending(person), 'text-success': !isOverspending(person) }">$ {{ calculateOverspending(person) }}</td>
+            <td [ngClass]="{ 'text-danger': isOverspending(person), 'text-success': !isOverspending(person) }">{{ calculateOverspendingPercentage(person) }} %</td>
+          </tr>
+        </tbody>
+      </table>
   
-    <div class="row">
-      <div class="col-md-6">
-        <canvas id="spendingPieChart"></canvas>
+    <div class="row mt100">
+        <div class="col-md-4">
+          <h3 class="chart-heading">Spending Percentage</h3>
+          <canvas id="spendingPieChart"></canvas>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+          <!-- <h3 class="chart-heading">Overspending Percentage</h3>
+          <canvas id="overspendingPieChart"></canvas> -->
+          <h3>Yearly Overspending</h3>
+          <canvas id="yearlyOverspendingChart"></canvas>
+        </div>
       </div>
-      <div class="col-md-6">
-        <canvas id="overspendingPieChart"></canvas>
-      </div>
-    </div>
-  
-    <div class="text-center mt-4">
-      <h3>Yearly Overspending</h3>
-      <canvas id="yearlyOverspendingChart"></canvas>
-    </div>
+    
+      
   </div>
   
