@@ -169,6 +169,9 @@ export class SpendingComponent implements OnInit {
         data: [person.totalSpends],
         backgroundColor: this.isOverspending(person) ? '#dc3545' : '#28a745',
         borderWidth: 1,
+        //barThickness: 30, // Adjust the width of each bar as needed
+        //barPercentage: 0.3, // Adjust the width of each bar
+        //categoryPercentage: 0.8 // Adjust the gap between the bars
       };
     });
     this.yearlyOverspendingChart = new Chart(ctx, {
@@ -194,6 +197,15 @@ export class SpendingComponent implements OnInit {
             },
           },
         },
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20,
+          },
+        },
+        // indexAxis: 'y',
       },
     });
   }
