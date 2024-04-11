@@ -7,12 +7,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgChartsModule } from 'ng2-charts';
 import { LandingComponent } from './landing/landing.component';
 import { FamilyAcctDetailsComponent } from './family-acct-details/family-acct-details.component';
+import { SpendingComponent } from './spending/spending.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
-    FamilyAcctDetailsComponent
+    FamilyAcctDetailsComponent,
+    SpendingComponent
   ],
   imports: [
     BrowserModule,

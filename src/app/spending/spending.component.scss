@@ -1,0 +1,40 @@
+// _spending.component.scss
+
+.table {
+    th,
+    td {
+      vertical-align: middle;
+    }
+  }
+  
+  .panel-title {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+  }
+  
+  .panel-btn-text {
+    margin-right: 10px;
+  }
+  
+  .panel-total-balance {
+    font-weight: bold;
+  }
+  
+  .card {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  
+  .total-balance-container {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .total-balance-text {
+    font-weight: bold;
+    color: #007bff;
+  }
+  

@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Spending Overview</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Total Spends</th>
+          <th>Monthly Budget</th>
+          <th>Budget Edit</th>
+          <th>% Overspending</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of spendingData">
+          <td>{{ person.name }}</td>
+          <td>{{ person.totalSpends }}</td>
+          <td>{{ person.monthlyBudget }}</td>
+          <td><button class="btn btn-primary" (click)="editBudget(person)">Edit</button></td>
+          <td [ngClass]="{ 'text-danger': isOverspending(person), 'text-success': !isOverspending(person) }">{{ calculateOverspendingPercentage(person) }}%</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="spendingPieChart"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="overspendingPieChart"></canvas>
+      </div>
+    </div>
+  
+    <div class="text-center mt-4">
+      <h3>Yearly Overspending</h3>
+      <canvas id="yearlyOverspendingChart"></canvas>
+    </div>
+  </div>
+  
